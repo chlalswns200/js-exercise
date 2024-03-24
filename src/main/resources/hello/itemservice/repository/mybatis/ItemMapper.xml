@@ -4,26 +4,28 @@
 <mapper namespace="hello.itemservice.repository.mybatis.ItemMapper">
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        insert into item (item_name, price, quantity)
-        values (#{itemName}, #{price}, #{quantity})
+        insert into item (item_name, price, quantity, contents, img)
+        values (#{itemName}, #{price}, #{quantity}, #{contents}, #{img})
     </insert>
 
     <update id="update">
         update item
         set item_name=#{updateParam.itemName},
             price=#{updateParam.price},
-            quantity=#{updateParam.quantity}
+            quantity=#{updateParam.quantity},
+            contents=#{updateParam.contents},
+            img=#{updateParam.img}
         where id = #{id}
     </update>
 
     <select id="findById" resultType="Item">
-        select id, item_name, price, quantity
+        select id, item_name, price, quantity,contents,img
         from item
         where id = #{id}
     </select>
 
     <select id="findAll" resultType="Item">
-        select id, item_name, price, quantity
+        select id, item_name, price, quantity,contents,img
         from item
         <where>
             <if test="itemName != null and itemName != ''">
